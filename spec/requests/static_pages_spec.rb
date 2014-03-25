@@ -13,21 +13,21 @@ describe "Static pages" do
   end
 
   describe "Help page" do
-	before { visit static_pages_help_path }
+	before { visit help_path }
 
 	it { should have_content('Help') }
 	it { should have_title(full_title('Help')) }
   end
 
   describe "About page" do
-	  before { visit static_pages_about_path }
+	  before { visit about_path }
 
 	  it { should have_content('About Us') }
 	  it { should have_title(full_title('About')) }
   end
 
   describe "Contact page" do
-	  before { visit static_pages_contact_path }
+	  before { visit contact_path }
 
 	  it { should have_content('Contact Us') }
 	  it { should have_title(full_title('Contact')) }
