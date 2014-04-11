@@ -1,11 +1,24 @@
+<% if signed_in? %>
+	<div class="row">
+		<aside class="span4">
+		<section><%= render 'shared/user_info' %></section>
+		<section><%= render 'shared/micropost_form' %></section>
+		</aside>
+		<div class="span8">
+			<h3>Feed of posts</h3>
+			<%= render 'shared/feed' %>
+		</div>
+	</div>
+<% else %>
 <div class="center hero-unit">
 	<H1>Welcome to the Sample App</H1>
 
 	<H2>
-		This is the Sample Page for the <A HREF="http://www.railstutorial.com">Ruby on Rails Sample Application</A>
+		This is the home page for the <A HREF="http://www.railstutorial.com">Ruby on Rails Sample Application</A>, which just so happens to be a Twitter clone.
 	</H2>
 
-	<%= link_to "Sign up now!", new_user_path, class: "btn btn-large btn-primary" %>
+	<%= link_to "Sign up now!", signup_path, class: "btn btn-large btn-primary" %>
 </div>
 
 <%= link_to image_tag("rails.png", alt: "Rails"), 'http://rubyonrails.org/' %>
+<% end %>
