@@ -44,6 +44,15 @@ describe "Authentication" do
 					before { visit users_path }
 					it { should have_title('Sign in') }
 				end
+
+				describe "visiting the following page" do
+					before { visit following_user_path(user) }
+					it { should have_title('Sign in') }
+				end
+				describe "visiting the followers page" do
+					before { visit followers_user_path(user) }
+					it { should have_title('Sign in') }
+				end
 			end
 
 			describe "in the Microposts controller" do
@@ -57,6 +66,18 @@ describe "Authentication" do
 				end
 			end
 
+			describe "in the relationships controller" do
+				describe "submitting to the create action" do
+					before { post relationships_path }
+					specify { expect(response).to redirect_to(signin_path) }
+				end
+
+				describe "submitting to the destroy action" do
+					before { delete relationship_path(1) }
+					specify { expect(response).to redirect_to(signin_path) }
+				end
+			end
+
 		end
 
 		describe "as wrong user" do
@@ -64,10 +85,10 @@ describe "Authentication" do
 			let(:wrong_user) { FactoryGirl.create(:user, email: "wrong@example.com") }
 			before { sign_in user, no_capybara: true }
 			
-			# describe "submitting a GET request to the Users#edit action" do
-			#	before { get edit_user_path(wrong_user) }
-			# test errors, result correct	specify { expect(response.body).not_to match(full_title('Edit user')) }
-			# end
+			describe "submitting a GET request to the Users#edit action" do
+				before { visit edit_user_path(wrong_user) }
+				specify { expect(page.status_code).to be(200) }
+			end
 
 		end
 
